@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#55000000" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="0.12"
+            android:onClick="stopPressed"
+            android:text="Stop" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="111dp"
+            android:layout_margin="10dp"
+            android:onClick="startPressed"
+            android:text="Start" />
+
+    </LinearLayout>
+
+    <com.kevyavno.visualizer.VisualizerView
+        android:id="@+id/visualizerView"
+        android:layout_width="461dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.12"
+        android:background="#000000" />
+
+</LinearLayout>
