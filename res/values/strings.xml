@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World, VisualizerActivity!</string>
     <string name="app_name">AudioViz</string>
+    <string name="title_activity_display_fragment">DisplayFragment</string>
+    <string name="menu_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
