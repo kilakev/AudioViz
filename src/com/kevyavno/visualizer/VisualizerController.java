@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.audiofx.Equalizer;
 import android.media.audiofx.Visualizer;
@@ -66,6 +67,11 @@ public class VisualizerController {
 				mVisualizer.setEnabled(false);
 			}
 		});
+	}
+	public void colorUpdate(int red, int green, int blue) {
+		for (VisualizerView v: views) {
+			v.setColour(Color.argb(200, red, green, blue));
+		}
 	}
 	public void release()
 	{

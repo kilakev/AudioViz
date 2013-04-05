@@ -25,7 +25,18 @@
             android:name="com.kevyavno.app.DisplayFragment"
             android:label="@string/title_activity_display_fragment" >
         </activity>
+
         <service android:name="com.kevyavno.app.Player" />
+
+        <activity
+            android:name="com.kevyavno.app.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.kevyavno.app.AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />

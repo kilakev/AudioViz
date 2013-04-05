@@ -6,5 +6,21 @@
     <string name="title_activity_display_fragment">DisplayFragment</string>
     <string name="menu_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="stopBtn">Stop</string>
+    <string name="startBtn">Start</string>
+    <string name="settingsBtn">Settings</string>
+    <string name="aboutBtn">About</string>
+    <string name="settings_color_label">Set Colour:</string>
+    <string name="settings_button_label">Save</string>
+    <string name="seekbar_red">Red</string>
+    <string name="seekbar_green">Green</string>
+    <string name="seekbar_blue">Blue</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="about_title">About</string>
+    <string name="about_text">AudioViz is an Audio Visualizer application\n\nVersion 1.0\nCreated By: Kevin Yavno
+        </string>
+    <string name="about_layout_backBtn">Back</string>
+    
 
 </resources>

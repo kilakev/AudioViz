@@ -8,7 +8,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
-import android.util.Log;
 
 
 public class Player extends Service {
@@ -26,7 +25,6 @@ public class Player extends Service {
 	    mPlayer.setLooping(true);
 	    Intent i = new Intent("com.kevyavno.app.PlayingMusic");
 	    sendBroadcast(i);
-	    Log.v("service","broadcast sent");
 	}
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		mPlayer.start();

@@ -24,7 +24,7 @@ public class DisplayFragment extends Fragment{
 		View view = inflater.inflate(R.layout.activity_display_fragment, null);
 		mVisualizerView = (VisualizerView) view.findViewById(R.id.visualizerView);
 		playerIntent = new Intent(this.getActivity(),Player.class);
-		
+		init();
 		// Create UI components here.
 		return view;
 	}
@@ -34,18 +34,17 @@ public class DisplayFragment extends Fragment{
 	public void setController(VisualizerController c) {
 		control=c;
 	}
+	
 	@Override
 	public void onResume()
 	{
 		super.onResume();
-		init();
-		
 	}
 
 	@Override
 	public void onPause()
 	{
-		cleanUp();
+		//cleanUp();
 		super.onPause();
 	}
 

@@ -12,6 +12,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 
@@ -48,7 +49,7 @@ public class VisualizerView extends View {
 
 		mFadePaint.setColor(Color.argb(122, 255, 255, 255)); // Adjust alpha to change how quickly the image fades
 		mFadePaint.setXfermode(new PorterDuffXfermode(Mode.MULTIPLY));
-
+		setColour(Color.argb(200, 56, 138, 252));
 	}
 
 
@@ -71,6 +72,10 @@ public class VisualizerView extends View {
 	private int mDivisions = 8;
 	Paint paint = new Paint();
 
+	public void setColour(int col) {
+		paint.setColor(col);
+		Log.v("test","color being changed");
+	}
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
@@ -102,9 +107,9 @@ public class VisualizerView extends View {
 				+ ((byte) (mBytes[i + 1] + 128)) * (mRect.height() / 2) / 128;
 			}
 
-			paint.setStrokeWidth(1f);
+			paint.setStrokeWidth(1.5f);
 			paint.setAntiAlias(true);
-			paint.setColor(Color.argb(200, 56, 138, 252));
+			
 			mCanvas.drawLines(mPoints, paint);
 			mCanvas.drawPaint(mFadePaint);
 			canvas.drawBitmap(mCanvasBitmap, new Matrix(), null);
@@ -141,7 +146,6 @@ public class VisualizerView extends View {
 
 				paint.setStrokeWidth(25f);
 				paint.setAntiAlias(true);
-				paint.setColor(Color.argb(200, 56, 138, 252));
 				canvas.drawLines(mFFTPoints, paint);
 
 				// Fade out old contents
