@@ -42,6 +42,7 @@ public class MainActivity extends FragmentActivity {
 	ReceiveMessages myReceiver = null;
 	Boolean myReceiverIsRegistered = false;
 	Intent playerIntent;
+	int redVal,greenVal,blueVal;
 	Button stopBtn, startBtn, settingsBtn, aboutBtn;
 	boolean menu_visible = false;
 	public static final String PREF_NAME = "colours";
@@ -74,6 +75,9 @@ public class MainActivity extends FragmentActivity {
 		DisplayFragment f2 = new DisplayFragment();
 		f1.setController(controller);
 		f2.setController(controller);
+		redVal = pref.getInt("red", 56);
+		greenVal = pref.getInt("green", 138);
+		blueVal = pref.getInt("blue", 252);
 		f2.toggleWave();
 		
 		// Create fragments.
@@ -112,6 +116,7 @@ public class MainActivity extends FragmentActivity {
 				return false;
 			}
 		});
+		controller.colorUpdate(redVal,greenVal,blueVal);
 		
 	}
 	public void screenTapped() {
@@ -198,18 +203,15 @@ public class MainActivity extends FragmentActivity {
 		@Override
 		public void onReceive(Context arg0, Intent arg1) {
 			String action = arg1.getAction();
-			Log.v("test",action);
+				Log.v("testicle",action);
 			if (action.equalsIgnoreCase("com.kevyavno.app.PlayingMusic")) {
 				controller.link(Player.getPlayer()); 
 			} else if (action.equalsIgnoreCase("com.kevyavno.app.ColourChange")) {
-				int redVal,greenVal,blueVal;
 				redVal = pref.getInt("red", 56);
 				greenVal = pref.getInt("green", 138);
 				blueVal = pref.getInt("blue", 252);
-				//Log.v("test","red:" + redVal + " green:" + greenVal + " blue:" + blueVal);
 				controller.colorUpdate(redVal,greenVal,blueVal);
-				
-			}
+			} 
 		}
 		
 	}

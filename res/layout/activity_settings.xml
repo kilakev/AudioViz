@@ -89,4 +89,12 @@
         android:text="@string/seekbar_blue"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+   <!--  <Switch
+        android:id="@+id/gradient_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/saveBtn"
+        android:layout_alignLeft="@+id/blue_label"
+        android:text="@string/settings_switch" />
+	-->
 </RelativeLayout>

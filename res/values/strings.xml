@@ -21,6 +21,7 @@
     <string name="about_text">AudioViz is an Audio Visualizer application\n\nVersion 1.0\nCreated By: Kevin Yavno
         </string>
     <string name="about_layout_backBtn">Back</string>
+    <string name="settings_switch">Bar Graph Gradient</string>
     
 
 </resources>

@@ -13,16 +13,21 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Switch;
 
 public class SettingsActivity extends Activity {
 	int redVal,greenVal,blueVal;
 	SeekBar redBar,greenBar, blueBar;
 	ImageView previewBox;
 	Button saveBtn;
+	Switch gradient_switch;
 	
+	Boolean colourChanged, gradientToggled;
 	//Preferences variables
 	public static final String PREF_NAME = "colours";
 	SharedPreferences pref;
@@ -40,11 +45,13 @@ public class SettingsActivity extends Activity {
 		redVal = pref.getInt("red", 56);
 		greenVal = pref.getInt("green", 138);
 		blueVal = pref.getInt("blue",252);
+		gradientToggled = pref.getBoolean("gradient", true);
 		
 		redBar = (SeekBar) findViewById(R.id.redVal);
 		greenBar = (SeekBar) findViewById(R.id.greenVal);
 		blueBar = (SeekBar) findViewById(R.id.blueVal);
 		previewBox = (ImageView) findViewById(R.id.colourPreview);
+		//gradient_switch = (Switch) findViewById(R.id.gradient_switch);
 		
 		redBar.setOnSeekBarChangeListener(changeListener);
 		redBar.setProgress(redVal);
@@ -54,6 +61,18 @@ public class SettingsActivity extends Activity {
 		blueBar.setProgress(blueVal);
 		
 		previewBox.setBackgroundColor(Color.argb(200, redVal, greenVal, blueVal));
+		/*gradient_switch.setChecked(gradientToggled);
+		gradient_switch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				gradientToggled = true;
+				prefEditor.putBoolean("gradient", isChecked);
+				prefEditor.commit();
+				Log.v("settings","" + isChecked);
+				Intent i = new Intent("com.kevyavno.app.GradientChange");
+			    sendBroadcast(i);
+			}});*/
 		saveBtn = (Button) findViewById(R.id.saveBtn);
 		saveBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -61,6 +80,9 @@ public class SettingsActivity extends Activity {
 				finish();
 			}
 		});
+		
+		colourChanged = false;
+		gradientToggled = false;
 	}
 	OnSeekBarChangeListener changeListener = new OnSeekBarChangeListener() {
 
@@ -73,6 +95,7 @@ public class SettingsActivity extends Activity {
 				case R.id.blueVal: blueVal = progress; break;
 			}
 			previewBox.setBackgroundColor(Color.argb(200, redVal, greenVal, blueVal));
+			colourChanged = true;
 		}
 
 		@Override
@@ -84,18 +107,24 @@ public class SettingsActivity extends Activity {
 		@Override
 		public void onStopTrackingTouch(SeekBar seekBar) {
 			// TODO Auto-generated method stub
-			
 		}
-		
 	};
+	protected void onPause() {
+		super.onPause();
+		
+	}
 	protected void onDestroy() {
 		super.onDestroy();
-		prefEditor.putInt("red", redVal);
-		prefEditor.putInt("green", greenVal);
-		prefEditor.putInt("blue", blueVal);
-		prefEditor.commit();
-		Intent i = new Intent("com.kevyavno.app.ColourChange");
-	    sendBroadcast(i);
+		
+		if (colourChanged) {
+			prefEditor.putInt("red", redVal);
+			prefEditor.putInt("green", greenVal);
+			prefEditor.putInt("blue", blueVal);
+			prefEditor.commit();
+			Intent i = new Intent("com.kevyavno.app.ColourChange");
+		    sendBroadcast(i);
+		}
+		
 	}
 
 	@Override

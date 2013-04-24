@@ -6,11 +6,15 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.Shader;
+import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +22,7 @@ import android.view.View;
 
 public class VisualizerView extends View {
 	private Boolean isWave = false;
+	private Boolean gradient = true;
 	private byte[] mBytes;
 	private byte[] mFFTBytes;
 	private Rect mRect = new Rect();
@@ -63,6 +68,10 @@ public class VisualizerView extends View {
 		invalidate();
 	}
 
+	public void setGradient(Boolean bool) {
+		Log.v("testicles",bool + "");
+		gradient = bool;
+	}
 
 	Bitmap mCanvasBitmap;
 	Canvas mCanvas;
@@ -71,10 +80,10 @@ public class VisualizerView extends View {
 	protected float[] mFFTPoints;
 	private int mDivisions = 8;
 	Paint paint = new Paint();
-
+	Paint gridPaint = new Paint();
+	LinearGradient gradientShader = new LinearGradient(0, 0, 0, 590, new int[]{Color.RED,Color.RED,Color.YELLOW,Color.YELLOW,Color.GREEN}, null, TileMode.CLAMP);
 	public void setColour(int col) {
 		paint.setColor(col);
-		Log.v("test","color being changed");
 	}
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -107,7 +116,7 @@ public class VisualizerView extends View {
 				+ ((byte) (mBytes[i + 1] + 128)) * (mRect.height() / 2) / 128;
 			}
 
-			paint.setStrokeWidth(1.5f);
+			paint.setStrokeWidth(1.8f);
 			paint.setAntiAlias(true);
 			
 			mCanvas.drawLines(mPoints, paint);
@@ -143,15 +152,26 @@ public class VisualizerView extends View {
 					mFFTPoints[i * 4 + 1] = mRect.height();
 					mFFTPoints[i * 4 + 3] = mRect.height() - (dbValue * 2 - 10);
 				}
-
+	              
 				paint.setStrokeWidth(25f);
 				paint.setAntiAlias(true);
+				if (gradient) paint.setShader(gradientShader);
 				canvas.drawLines(mFFTPoints, paint);
 
 				// Fade out old contents
 				mCanvas.drawPaint(mFadePaint);
 
 				canvas.drawBitmap(mCanvasBitmap, new Matrix(), null);
+				 int width = canvas.getWidth();
+	               int pass = 0;
+	               int ypos = canvas.getHeight()/20;; 
+	               for (int i = 0; i < 20; i++) {
+	            	   gridPaint.setColor(Color.BLACK);
+	            	   gridPaint.setStrokeWidth(2.0f);
+	            	   gridPaint.setAntiAlias(true);
+	                   canvas.drawLine(0, (ypos*pass)+ 5, width, (ypos*pass)+5, gridPaint);      
+	                   pass++;
+	               } 
 			}
 		}
 	}

@@ -73,6 +73,11 @@ public class VisualizerController {
 			v.setColour(Color.argb(200, red, green, blue));
 		}
 	}
+	public void setGradient(Boolean bool) {
+		for (VisualizerView v: views) {
+			v.setGradient(bool);
+		}
+	}
 	public void release()
 	{
 		mVisualizer.release();
